@@ -24,4 +24,5 @@ urlpatterns = [
     path('donor/', include('donors.urls')),
     path('receiver/', include('receivers.urls')),
     path('main/', include('main.urls')),
+    path('profile/', include('userprofile.urls')),
 ]
