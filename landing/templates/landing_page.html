@@ -1,0 +1,47 @@
+<!-- landing/templates/landing_page.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Blood Donation System</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="{% url 'doctor_login' %}" class="btn btn-primary">Doctor Login</a>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'donor_register' %}" class="btn btn-success">Donor Login</a>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'receiver_login' %}" class="btn btn-danger">Receiver Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
