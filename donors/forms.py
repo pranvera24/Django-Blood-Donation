@@ -7,7 +7,7 @@ from .models import Donor
 class DonorRegistrationForm(forms.ModelForm):
     class Meta:
         model = Donor
-        fields = ['name', 'surname', 'age', 'email', 'phone_number', 'blood_group', 'health_history', 'last_donation_date']
+        fields = ['name', 'surname', 'age', 'email', 'phone_number', 'blood_group', 'health_history', 'last_donation_date','location']
         widgets = {
             'last_donation_date': forms.DateInput(attrs={'type': 'date'})
         }
@@ -30,3 +30,16 @@ class DonorRegistrationForm(forms.ModelForm):
         if last_donation_date and last_donation_date > now().date():
             raise ValidationError("Last donation date cannot be in the future.")
         return last_donation_date
+    
+    def __init__(self, *args, **kwargs):
+        super(DonorRegistrationForm, self).__init__(*args, **kwargs)
+        self.fields['location'] = forms.ChoiceField(choices=self.get_location_choices())
+
+    def get_location_choices(self):
+        # You can populate location choices dynamically here, for now, I'll provide static choices
+        return [
+            ('Location 1', 'Location 1'),
+            ('Location 2', 'Location 2'),
+            ('Location 3', 'Location 3'),
+            # Add more choices as needed
+        ]
