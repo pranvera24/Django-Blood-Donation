@@ -11,7 +11,7 @@ def donor_registration(request):
         if form.is_valid():
             form.save()
             print("Form is valid. Data saved successfully")
-            return redirect ('/')
+            return redirect ('/') #TODO Te kjo pjese do duhet te vendose ni url nese forma esht valid
         else:
             print(form.errors)
     else:
