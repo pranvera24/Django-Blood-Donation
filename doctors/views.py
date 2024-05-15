@@ -1,64 +1,58 @@
-from django.shortcuts import render, redirect
+# from django.shortcuts import render, redirect
+# from .models import Doctor
+# from .forms import DoctorRegistrationForm
+
+
+# from django.shortcuts import redirect
+
+# def doctor_registration(request):
+#     if request.method == 'POST':
+#         form = DoctorRegistrationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('/main/')
+#     else:
+#         form = DoctorRegistrationForm()
+#     return render(request, 'doctors/doctor_login.html', {'form': form})
+
+
+# from django.shortcuts import render, redirect, get_object_or_404
+# from .models import Doctor
+# from .forms import DoctorRegistrationForm
+
+# def doctor_registration(request):
+#     if request.method == 'POST':
+#         form = DoctorRegistrationForm(request.POST)
+#         if form.is_valid():
+#             doctor = form.save()
+#             return redirect('doctor_profile', doctor_pin=doctor.pin)
+#     else:
+#         form = DoctorRegistrationForm()
+#     return render(request, 'doctors/doctor_login.html', {'form': form})
+
+# def doctor_profile(request, doctor_pin):
+#     doctor = get_object_or_404(Doctor, pin=doctor_pin)
+#     return render(request, 'profile.html', {'doctor': doctor})
+
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Doctor
 from .forms import DoctorRegistrationForm
-
-
-from django.shortcuts import redirect
+from donors.models import Donor
+from receivers.models import Receiver
+from receivers.forms import ReceiverRegistrationForm
 
 def doctor_registration(request):
     if request.method == 'POST':
         form = DoctorRegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('/main/')
+            doctor = form.save()
+            return redirect('doctor_profile', doctor_pin=doctor.pin)
     else:
         form = DoctorRegistrationForm()
     return render(request, 'doctors/doctor_login.html', {'form': form})
 
-
-
-
-
-# def doctor_login(request):
-#     if request.method == 'POST':
-#         # if 'register' in request.POST:
-#             form = DoctorRegistrationForm(request.POST)
-#             if form.is_valid():
-#                 user = form.save()
-
-#                 # Create User object
-#                 # user = User.objects.create_user(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-
-#                 # # Create Doctor object
-#                 # Doctor.objects.create(
-#                 #     user=user,
-#                 #     name=form.cleaned_data['name'],
-#                 #     surname=form.cleaned_data['surname'],
-#                 #     email=form.cleaned_data['email'],
-#                 #     phone_number=form.cleaned_data['phone_number'],
-#                 #     experience_years=form.cleaned_data['experience_years'],
-#                 #     specialization=form.cleaned_data['specialization']
-#                 # )
-#                 # form.save()
-                
-
-#                 return redirect('login_success')  # Redirect to a success page after registration
-#         else:
-#             # Handle doctor login form submission
-#             username = request.POST['username']
-#             password = request.POST['password']
-#             user = authenticate(request, username=username, password=password)
-#             if user is not None:
-#                 # Check if the user is a doctor
-#                 if hasattr(user, 'doctor'):
-#                     login(request, user)
-#                     return redirect('doctor_dashboard')  # Redirect to doctor dashboard
-#                 else:
-#                     # Handle case where authenticated user is not a doctor
-#                     return render(request, 'doctors/doctor_login.html', {'error_message': 'You are not a registered doctor.'})
-#             else:
-#                 # Handle invalid login credentials
-#                 return render(request, 'doctors/doctor_login.html', {'error_message': 'Invalid username or password.'})
-#     else:
-#         form = DoctorRegistrationForm()
-#     return render(request, 'doctors/doctor_login.html', {'form': form})
+def doctor_profile(request, doctor_pin):
+    doctor = get_object_or_404(Doctor, pin=doctor_pin)
+    donors_list = Donor.objects.all()
+    receivers_list = Receiver.objects.all()
+    return render(request, 'profile.html', {'doctor': doctor, 'donors_list': donors_list, 'receivers_list': receivers_list})

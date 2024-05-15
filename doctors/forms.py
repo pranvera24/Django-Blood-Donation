@@ -15,6 +15,13 @@ class DoctorRegistrationForm(forms.ModelForm):
         pin = self.cleaned_data.get('pin')
         # list of valid pins 
         valid_pins = ['123', '456', '789']  
+
+        # Check if the PIN is already associated with another doctor
+        if Doctor.objects.filter(pin=pin).exists():
+            raise forms.ValidationError("This PIN is already associated with another doctor.")
+        
+        # Check if the PIN is in the list of valid pins
         if pin not in valid_pins:
             raise forms.ValidationError("Invalid PIN")
+
         return pin

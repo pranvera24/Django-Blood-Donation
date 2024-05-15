@@ -1,0 +1,79 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+<body>
+    <h1>Login Page</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="login_type">Select Login Type:</label>
+        <select name="login_type" id="login_type">
+            <option value="doctor">Doctor</option>
+            <option value="donor">Donor</option>
+            <option value="receiver">Receiver</option>
+        </select>
+        <br><br>
+        <div id="doctor-form" class="form-div" style="display: none;">
+            {{ doctor_form.as_p }}
+        </div>
+        <div id="donor-form" class="form-div" style="display: none;">
+            {{ donor_form.as_p }}
+        </div>
+        <div id="receiver-form" class="form-div" style="display: none;">
+            {{ receiver_form.as_p }}
+        </div>
+        <input type="submit" value="Login">
+    </form>
+    <script>
+        document.getElementById('login_type').addEventListener('change', function() {
+            var selectedOption = this.value;
+            var formDivs = document.querySelectorAll('.form-div');
+            formDivs.forEach(function(div) {
+                if (div.id === selectedOption + '-form') {
+                    div.style.display = 'block';
+                } else {
+                    div.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+ {% endcomment %}
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Login Page</title>
+ </head>
+ <body>
+     <h1>Login Page</h1>
+     <form method="post">
+         {% csrf_token %}
+         <label for="login_type">Select Login Type:</label>
+         <select name="login_type" id="login_type">
+             <option value="doctor">Doctor</option>
+             <option value="donor">Donor</option>
+             <option value="receiver">Receiver</option>
+         </select>
+         <br><br>
+         <div id="doctor-form" class="form-div">
+             {{ doctor_form.as_p }}
+         </div>
+         <div id="donor-form" class="form-div" style="display: none;">
+             {{ donor_form.as_p }}
+         </div>
+         <div id="receiver-form" class="form-div" style="display: none;">
+             {{ receiver_form.as_p }}
+         </div>
+         <input type="submit" value="Login">
+     </form>
+ </body>
+ </html>
+ 
+ 
+

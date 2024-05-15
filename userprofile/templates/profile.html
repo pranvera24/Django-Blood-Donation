@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #f8f9fa; /* Optional: Add a light background color */
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .profile-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .table-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .btn-main {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .btn-main:hover {
+            background-color: #0056b3;
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Doctor Profile</h1>
+        <div class="profile-card">
+            <h2>Profile Information</h2>
+            <p><strong>Name:</strong> {{ doctor.name }}</p>
+            <p><strong>Surname:</strong> {{ doctor.surname }}</p>
+            <p><strong>Email:</strong> {{ doctor.email }}</p>
+            <p><strong>Phone Number:</strong> {{ doctor.phone_number }}</p>
+            <p><strong>Experience Years:</strong> {{ doctor.experience_years }}</p>
+            <p><strong>Specialization:</strong> {{ doctor.specialization }}</p>
+        </div>
+
+        <div class="table-card">
+            <h2>Donors</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Location</th>
+                        <th>Blood Group</th>
+                        <th>Health History</th>
+                        <th>Last Donation Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for donor in donors_list %}
+                    <tr>
+                        <td>{{ donor.name }}</td>
+                        <td>{{ donor.surname }}</td>
+                        <td>{{ donor.age }}</td>
+                        <td>{{ donor.email }}</td>
+                        <td>{{ donor.phone_number }}</td>
+                        <td>{{ donor.location }}</td>
+                        <td>{{ donor.blood_group }}</td>
+                        <td>{{ donor.health_history }}</td>
+                        <td>{{ donor.last_donation_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-card">
+            <h2>Receivers</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Location</th>
+                        <th>Blood Group</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for receiver in receivers_list %}
+                    <tr>
+                        <td>{{ receiver.name }}</td>
+                        <td>{{ receiver.surname }}</td>
+                        <td>{{ receiver.age }}</td>
+                        <td>{{ receiver.email }}</td>
+                        <td>{{ receiver.phone_number }}</td>
+                        <td>{{ receiver.location }}</td>
+                        <td>{{ receiver.blood_group }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- "Go to Website" button -->
+        <a href="/main/" class="btn btn-main">Go to Website</a>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
