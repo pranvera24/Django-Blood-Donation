@@ -44,36 +44,102 @@
 </html>
  {% endcomment %}
  <!DOCTYPE html>
- <html lang="en">
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Login Page</title>
- </head>
- <body>
-     <h1>Login Page</h1>
-     <form method="post">
-         {% csrf_token %}
-         <label for="login_type">Select Login Type:</label>
-         <select name="login_type" id="login_type">
-             <option value="doctor">Doctor</option>
-             <option value="donor">Donor</option>
-             <option value="receiver">Receiver</option>
-         </select>
-         <br><br>
-         <div id="doctor-form" class="form-div">
-             {{ doctor_form.as_p }}
-         </div>
-         <div id="donor-form" class="form-div" style="display: none;">
-             {{ donor_form.as_p }}
-         </div>
-         <div id="receiver-form" class="form-div" style="display: none;">
-             {{ receiver_form.as_p }}
-         </div>
-         <input type="submit" value="Login">
-     </form>
- </body>
- </html>
- 
- 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            background: linear-gradient(135deg, #f9f3f3, #ffe5e5);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        form {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #ff0000;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        label {
+            font-weight: bold;
+        }
+        select,
+        input[type="submit"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #d40000;
+        }
+        .form-div {
+            display: none;
+        }
+        .form-div.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        <h1>Login Page</h1>
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="login_type">Select Login Type:</label>
+            <select name="login_type" id="login_type" class="form-control">
+                <option value="doctor">Doctor</option>
+                <option value="donor">Donor</option>
+                <option value="receiver">Receiver</option>
+            </select>
+        </div>
+        <div id="doctor-form" class="form-div">
+            {{ doctor_form.as_p }}
+        </div>
+        <div id="donor-form" class="form-div">
+            {{ donor_form.as_p }}
+        </div>
+        <div id="receiver-form" class="form-div">
+            {{ receiver_form.as_p }}
+        </div>
+        <input type="submit" value="Login" class="btn btn-primary">
+    </form>
 
+    <!-- Bootstrap JS and jQuery (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#login_type').change(function() {
+                $('.form-div').removeClass('active').hide();
+                var selectedForm = '#' + $(this).val() + '-form';
+                $(selectedForm).addClass('active').show();
+            });
+        });
+    </script>
+</body>
+</html>
